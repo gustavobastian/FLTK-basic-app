@@ -1,7 +1,7 @@
 # Simple App using FLTK and SQLITE3
 
 ## Objetives: 
-The main purpose of this project is learning how to use Conan.io(https://conan.io/)(this project follows the tips from https://www.youtube.com/watch?v=i_FGM_rH-Tg&t=7s by José Tomás Tocino)
+The main purpose of this project is learning how to use Conan.io(https://conan.io/) (this project follows the tips from https://www.youtube.com/watch?v=i_FGM_rH-Tg&t=7s by José Tomás Tocino)
 
 
 
