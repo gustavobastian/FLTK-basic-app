@@ -120,11 +120,7 @@ int databaseService::dropTable(std::string tableName){
  * @return int 
  */
 int databaseService::insertElementTable(std::string Element,std::string tableName){
-
-    //std::cout<<"element:"<<Element<<std::endl;
-    //std::cout<<"tableName:"<<tableName<<std::endl;
-
-    //std::string sql = "INSERT INTO person VALUES(1, 'John Doe', 30);";
+    
     std::string sql = "INSERT INTO " +tableName+" VALUES("+ Element +");";
     this->rc = sqlite3_exec(this->db, sql.c_str(), NULL, 0, NULL);
 
@@ -136,9 +132,12 @@ int databaseService::insertElementTable(std::string Element,std::string tableNam
     return 0;
 };
 
-std::string databaseService::getElement(std::string tableName, std::string elementTag, std::string elementValue){
+std::string databaseService::findElement(std::string tableName, std::string elementTag, std::string elementValue){
+
+    std::stringstream ss;    
+    std::string output;
     
-    std::string sql = "SELECT name, age FROM person WHERE id = 1;";
+    std::string sql = "SELECT *  FROM "+tableName+" WHERE "+elementTag+" = "+ elementValue+";";
     sqlite3_stmt *stmt;
     rc = sqlite3_prepare_v2(db, sql.c_str(), -1, &stmt, NULL);
 
@@ -150,14 +149,19 @@ std::string databaseService::getElement(std::string tableName, std::string eleme
     rc = sqlite3_step(stmt);
 
     if (rc == SQLITE_ROW) {
-        std::string name = reinterpret_cast<const char *>(sqlite3_column_text(stmt, 0));
-        int age = sqlite3_column_int(stmt, 1);
-        std::cout << "Name: " << name << ", Age: " << age << std::endl;
+
+        for(unsigned int i=0;i<sqlite3_data_count(stmt);i++)
+        {        
+            ss<<  reinterpret_cast<const char *>(sqlite3_column_text(stmt, i))<< ",";
+        }    
+        ss<<("|");
+        
     }
+    output=ss.str();
 
     sqlite3_finalize(stmt);
 
-    return "nothing";
+    return output;
 };
 
 std::string databaseService::getAllElement(){    

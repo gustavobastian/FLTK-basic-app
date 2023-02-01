@@ -37,7 +37,7 @@ class databaseService {
     int createTable(std::string tableName,std::vector<std::string> columns);
     int dropTable(std::string tableName);
     int insertElementTable(std::string Element, std::string tableName);
-    std::string getElement(std::string tableName, std::string elementTag, std::string elementValue);
+    std::string findElement(std::string tableName, std::string elementTag, std::string elementValue);
     std::string getAllElement();
     ~databaseService();
 

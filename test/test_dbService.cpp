@@ -96,9 +96,12 @@ TEST(DBCREATION, TABLEDROP){
     auto output1 = myDb->insertElementTable(value,"myTable");
     EXPECT_EQ(output1,0);
 
+    auto output2 = myDb->findElement("myTable","id","1");
+    std::cout<<"received:"<<output2<<endl;
+
     //cleaning
-    auto output2 = myDb->dropTable("myTable");
-    EXPECT_EQ(output2,0);
+    auto output3 = myDb->dropTable("myTable");
+    EXPECT_EQ(output3,0);
 
     vector<std::string>().swap(columns);
     delete myDb;
