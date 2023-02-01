@@ -3,6 +3,7 @@
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <vector>
 
 /**
  * @brief Construct a new database Service::database Service object
@@ -20,9 +21,9 @@ databaseService::databaseService(std::string addressP){
  * @return int 0 if ok, -1 if error
  */
 int databaseService::openDB(){
-    this->rc = sqlite3_open("../data/generalDB", &(this->db));    
+    this->rc = sqlite3_open("../../data/generalDB", &(this->db));    
     if (this->rc) {
-        std::cout << "Error opening database: " << sqlite3_errmsg(db) << std::endl;
+        std::cerr << "Error opening database: " << sqlite3_errmsg(db) << std::endl;
         return -1;
     }
     else
@@ -33,11 +34,13 @@ int databaseService::openDB(){
 }
 
 int databaseService::createTable(std::string tableName){
+    if(tableName.size()==0) {
+         std::cerr  << "Error creating table: no tablename" << std::endl;
+        return -1;
+    }
       // create a table
-    std::string sql = "CREATE TABLE IF NOT EXISTS person (id INTEGER PRIMARY KEY, name TEXT, age INTEGER);";
-    rc = sqlite3_exec(db, 
-    "CREATE TABLE IF NOT EXISTS person (id INTEGER PRIMARY KEY, name TEXT, age INTEGER);"
-    , NULL, 0, NULL);
+    std::string sql = "CREATE TABLE IF NOT EXISTS "+ tableName +" (id INTEGER PRIMARY KEY, name TEXT, age INTEGER);";
+    rc = sqlite3_exec(db, sql.c_str()  , NULL, 0, NULL);
 
     if (rc != SQLITE_OK) {
         std::cout  << "Error creating table: " << sqlite3_errmsg(db) << std::endl;
@@ -45,6 +48,50 @@ int databaseService::createTable(std::string tableName){
     }
     return 0;
 };
+
+int databaseService::createTable(std::string tableName, std::vector<std::string> columns){
+    
+    if((columns.size()==0)||(tableName.size()==0)) {
+         std::cout  << "Error creating table: no columns o no tablename" << std::endl;
+        return -1;
+    }
+
+    // create a table with columns
+    std::string sql2= " (";
+    for (std::string column : columns){        
+        sql2+= column +", ";
+    }
+    sql2.at(sql2.size()-2)=0x20;
+    sql2+=");";
+    
+    std::string sql = "CREATE TABLE IF NOT EXISTS "+ tableName +sql2;//" (id INTEGER PRIMARY KEY, name TEXT, age INTEGER);";
+    rc = sqlite3_exec(db, sql.c_str()  , NULL, 0, NULL);
+
+    if (rc != SQLITE_OK) {
+        std::cout  << "Error creating table: " << sqlite3_errmsg(db) << std::endl;
+        return -1;
+    }
+    return 0;
+};
+
+
+int databaseService::dropTable(std::string tableName){
+    if((tableName.size()==0)) {
+         std::cout  << "Error dropping table: no tablename" << std::endl;
+        return -1;
+    }
+
+      // create a table
+    std::string sql = "drop TABLE "+ tableName ;
+    rc = sqlite3_exec(db, sql.c_str()  , NULL, 0, NULL);
+
+    if (rc != SQLITE_OK) {
+        std::cout  << "Error droping table: " << sqlite3_errmsg(db) << std::endl;
+        return -1;
+    }
+    return 0;
+};
+
 
 int databaseService::insertElementTable(std::string Element,std::string tableName){
     std::string sql = "INSERT INTO person VALUES(1, 'John Doe', 30);";

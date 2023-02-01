@@ -8,5 +8,7 @@ target_include_directories(testLib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}  "/lib/gte
 
 add_executable(test_runner test_runner.cpp )
 add_executable(mock_runner mock_runner.cpp )
+add_executable(db_runner test_dbService.cpp )
 target_link_libraries(test_runner  LINK_PUBLIC  ${CONAN_LIBS} gtest gtest_main windowsLib db2Lib  fltk fltk_images Xft  sqlite3)
 target_link_libraries(mock_runner  LINK_PUBLIC  ${CONAN_LIBS} gtest gtest_main windowsLib db2Lib  fltk fltk_images Xft  sqlite3)
+target_link_libraries(db_runner  LINK_PUBLIC  ${CONAN_LIBS} gtest gtest_main windowsLib db2Lib  fltk fltk_images Xft  sqlite3)

@@ -16,6 +16,7 @@
 
 #include <sqlite3.h>
 #include <string>
+#include <vector>
 #include <person_class.h>
 /**
  * @brief class used to communicate to de sqlite database
@@ -33,6 +34,8 @@ class databaseService {
     int openDB();
 
     int createTable(std::string tableName);
+    int createTable(std::string tableName,std::vector<std::string> columns);
+    int dropTable(std::string tableName);
     int insertElementTable(std::string Element, std::string tableName);
     std::string getElement(std::string tableName, std::string elementTag, std::string elementValue);
     std::string getAllElement();
