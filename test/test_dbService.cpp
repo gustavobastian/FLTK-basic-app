@@ -1,8 +1,9 @@
-#include<gtest/gtest.h>
-#include<databaseService.h>
+#include <gtest/gtest.h>
+#include <databaseService.h>
 #include <string>
-#include<iostream>
-#include<vector>
+#include <map>
+#include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -14,6 +15,8 @@ TEST(DBCREATION, TABLECREATION){
     auto output = myDb->createTable("myTable");
     
     EXPECT_EQ(output,0);
+
+    delete myDb;
  }
 
  TEST(DBCREATION, TABLECREATION_COLUMNS){
@@ -40,6 +43,10 @@ TEST(DBCREATION, TABLECREATION){
 
     auto output3 = myDb->dropTable("myTable");
     EXPECT_EQ(output3,0);
+    
+    vector<std::string>().swap(columns);
+
+    delete myDb;
  }
 
 TEST(DBCREATION, TABLEDROP){
@@ -60,7 +67,47 @@ TEST(DBCREATION, TABLEDROP){
 
     auto output2 = myDb->dropTable("myTable");
     EXPECT_EQ(output2,0);
+
+    vector<std::string>().swap(columns);
+    delete myDb;
  } 
+
+ TEST(DBINSERTION, INSERTELEMENT){
+    std::string  data("myDB");
+    auto *myDb= new databaseService(data);
+    myDb->openDB();
+
+    std::vector <std::string> columns;
+    
+    //table for test
+    columns.push_back("id INTEGER PRIMARY KEY");
+    columns.push_back("firstname TEXT");
+    columns.push_back("lastname TEXT");
+    columns.push_back("age INTEGER");
+
+    //element for test
+    std::string value= "1, 'Pedro','Perez',20 ";
+    //creation
+    auto output = myDb->createTable("myTable",columns);    
+    EXPECT_EQ(output,0);
+    
+    //test
+
+    auto output1 = myDb->insertElementTable(value,"myTable");
+    EXPECT_EQ(output1,0);
+
+    //cleaning
+    auto output2 = myDb->dropTable("myTable");
+    EXPECT_EQ(output2,0);
+
+    vector<std::string>().swap(columns);
+    delete myDb;
+ } 
+
+
+
+
+
 
 int main(int argc, char **argv) {
 

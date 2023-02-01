@@ -32,7 +32,12 @@ int databaseService::openDB(){
     }
 
 }
-
+/**
+ * @brief create a simple table with id(int primary), name(string) and age(int)
+ * 
+ * @param tableName 
+ * @return int -1: error, 0: success
+ */
 int databaseService::createTable(std::string tableName){
     if(tableName.size()==0) {
          std::cerr  << "Error creating table: no tablename" << std::endl;
@@ -49,6 +54,15 @@ int databaseService::createTable(std::string tableName){
     return 0;
 };
 
+/**
+ * @brief create a Table in the database
+ * 
+ * @param tableName name of the table
+ * @param columns vector of string with columns names and characteristics 
+ * Example:id INTEGER PRIMARY KEY,firstname TEXT
+ * look at sqlite3 documentation for more characteristics.
+ * @return int -1:error, 0:success
+ */
 int databaseService::createTable(std::string tableName, std::vector<std::string> columns){
     
     if((columns.size()==0)||(tableName.size()==0)) {
@@ -74,6 +88,12 @@ int databaseService::createTable(std::string tableName, std::vector<std::string>
     return 0;
 };
 
+/**
+ * @brief Drop a table from the database
+ * 
+ * @param tableName name of the table
+ * @return int -1: error, 0: success
+ */
 
 int databaseService::dropTable(std::string tableName){
     if((tableName.size()==0)) {
@@ -92,9 +112,20 @@ int databaseService::dropTable(std::string tableName){
     return 0;
 };
 
-
+/**
+ * @brief 
+ * 
+ * @param Element 
+ * @param tableName 
+ * @return int 
+ */
 int databaseService::insertElementTable(std::string Element,std::string tableName){
-    std::string sql = "INSERT INTO person VALUES(1, 'John Doe', 30);";
+
+    //std::cout<<"element:"<<Element<<std::endl;
+    //std::cout<<"tableName:"<<tableName<<std::endl;
+
+    //std::string sql = "INSERT INTO person VALUES(1, 'John Doe', 30);";
+    std::string sql = "INSERT INTO " +tableName+" VALUES("+ Element +");";
     this->rc = sqlite3_exec(this->db, sql.c_str(), NULL, 0, NULL);
 
     if (rc != SQLITE_OK) {
