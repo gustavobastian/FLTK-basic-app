@@ -8,10 +8,10 @@
 /**
  * @brief Construct a new database Service::database Service object
  * 
- * @param addressP string address of the database
+ * @param addressP string place and name of the database(ex /opt/mydatabase)
  */
 databaseService::databaseService(std::string addressP){
-    this->address=addressP; 
+    this->address=addressP;    
     return;
 }
 
@@ -21,7 +21,7 @@ databaseService::databaseService(std::string addressP){
  * @return int 0 if ok, -1 if error
  */
 int databaseService::openDB(){
-    this->rc = sqlite3_open("../../data/generalDB", &(this->db));    
+    this->rc = sqlite3_open((this->address).c_str(), &(this->db));    
     if (this->rc) {
         std::cerr << "Error opening database: " << sqlite3_errmsg(db) << std::endl;
         return -1;

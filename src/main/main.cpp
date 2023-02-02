@@ -48,7 +48,7 @@ static void logout_cb(Fl_Widget* w,void* data){
 
 int main(int argc, char **argv) {    
     
-    std::string  data("myDB");
+    std::string  data(dBAddress);
     auto *myDb= new databaseService(data);
     myDb->openDB();
    

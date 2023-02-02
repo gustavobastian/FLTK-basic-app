@@ -24,3 +24,5 @@
  * @brief tabs height
 */
 #define T_Height 480 
+
+#define dBAddress "../data/generalDB.db"

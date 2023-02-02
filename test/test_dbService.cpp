@@ -8,7 +8,7 @@
 using namespace std;
 
 TEST(DBCREATION, TABLECREATION){
-    std::string  data("myDB");
+    std::string  data("../../data/generalDB.db");
     auto *myDb= new databaseService(data);
     myDb->openDB();
 
@@ -20,7 +20,7 @@ TEST(DBCREATION, TABLECREATION){
  }
 
  TEST(DBCREATION, TABLECREATION_COLUMNS){
-    std::string  data("myDB");
+    std::string  data("../../data/generalDB.db");
     auto *myDb= new databaseService(data);
     myDb->openDB();
 
@@ -50,7 +50,7 @@ TEST(DBCREATION, TABLECREATION){
  }
 
 TEST(DBCREATION, TABLEDROP){
-    std::string  data("myDB");
+    std::string  data("../../data/generalDB.db");
     auto *myDb= new databaseService(data);
     myDb->openDB();
 
@@ -73,7 +73,7 @@ TEST(DBCREATION, TABLEDROP){
  } 
 
  TEST(DBINSERTION, INSERTELEMENT){
-    std::string  data("myDB");
+    std::string  data("../../data/generalDB.db");
     auto *myDb= new databaseService(data);
     myDb->openDB();
 
