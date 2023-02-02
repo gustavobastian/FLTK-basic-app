@@ -25,8 +25,7 @@
 
 class Person{
     private:
-        int id;
-        int age;
+        int id;        
         std::string firstname;
         std::string lastname;
         std::string password;
@@ -36,10 +35,9 @@ class Person{
     public:
         Person();
         Person(const std::string *a);
-        Person(int x, int y, const std::string& a ,
+        Person(int x, const std::string& a ,
         const std::string& n,const std::string& f ,
-        const std::string& e,const std::string& s ):id(x),
-        age(y),firstname(a),lastname(n),password(f),isLoggedIn(false),
+        const std::string& e,const std::string& s ):id(x),firstname(a),lastname(n),password(f),isLoggedIn(false),
         username(e),mode(s) {};
 
         /**
@@ -73,17 +71,7 @@ class Person{
          * @param _username 
          */
         void setUsername(std::string _username){username=_username;};
-        /**
-         * @brief Set the Age object
-         * 
-         * @param ageP 
-         */
-        void setAge(int ageP){age=ageP;return;};
-        /**
-         * @brief Set the Id object
-         * 
-         * @param idP 
-         */
+        
         void setId(int idP){id=idP;return;};
 
         /**
@@ -117,12 +105,7 @@ class Person{
          * @return std::string 
          */
         std::string getUsername(){return username;};
-        /**
-         * @brief Get the Age object
-         * 
-         * @return int 
-         */
-        int getAge(){return age;};
+        
         /**
          * @brief Get the Id object
          * 

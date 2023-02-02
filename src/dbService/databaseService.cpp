@@ -190,8 +190,7 @@ std::string databaseService::getAllElement(std::string tableName, unsigned int l
     rc = sqlite3_prepare_v2(db, sql.c_str(), -1, &stmt, NULL);
 
     if (rc != SQLITE_OK) {
-        std::cout << "Error querying table: " << sqlite3_errmsg(db) << std::endl;
-        //return -1;
+        std::cout << "Error querying table: " << sqlite3_errmsg(db) << std::endl;        
         return "Error querying table: ";
     }
 
@@ -206,8 +205,6 @@ std::string databaseService::getAllElement(std::string tableName, unsigned int l
         ss<<(";");
         output+=ss.str();
         ss.str("");
-      //  output.at(output.size()-2)=0x20;        
-
         rc = sqlite3_step(stmt);
     }
 

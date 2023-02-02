@@ -13,11 +13,9 @@ TEST(PersonClassTest, METHODS_TEST){
     const std::string mode="administrador";
     const std::string username="myUser";
 
-    Person *testPerson=new Person(1,21,firstName,lastName,password,username,mode);
+    Person *testPerson=new Person(1,firstName,lastName,password,username,mode);
     
     
-    testPerson->setAge(13);
-    auto result= testPerson->getAge();    
     auto ID= testPerson->getId();    
     auto name= testPerson->getFirstName();
     auto lastname= testPerson->getLastName();
@@ -26,7 +24,7 @@ TEST(PersonClassTest, METHODS_TEST){
     auto modeTest= testPerson->getMode();
 
     delete testPerson;
-    EXPECT_EQ(result, 13);
+    
     EXPECT_STREQ(lastName.c_str(), lastname.c_str());
     EXPECT_STREQ(name.c_str(), firstName.c_str());
     EXPECT_STREQ(pass.c_str(), password.c_str());
@@ -38,13 +36,13 @@ TEST(PersonClassTest, METHODS_TEST){
 
 TEST(PersonClassTest, INITIAL_STATE_NOT_LOGGED){
 
-      const std::string firstName="jhon";
+     const std::string firstName="jhon";
     const std::string lastName="jhonP";
     const std::string password="jhonPP";
     const std::string mode="administrador";
     const std::string username="myUser";
 
-    Person *testPerson=new Person(1,21,firstName,lastName,password,username,mode);
+    Person *testPerson=new Person(1,firstName,lastName,password,username,mode);
 
     bool state= testPerson->getLoggedIn();
     EXPECT_EQ(state, false);
@@ -60,7 +58,7 @@ TEST(PersonClassTest, LOGGING_IN_TEST){
     const std::string mode="administrador";
     const std::string username="myUser";
 
-    Person *testPerson=new Person(1,21,firstName,lastName,password,username,mode);
+    Person *testPerson=new Person(1,firstName,lastName,password,username,mode);
     testPerson->setLoggedIn();
     state= testPerson->getLoggedIn();
     EXPECT_EQ(state, true);
@@ -76,7 +74,7 @@ TEST(PersonClassTest, LOGGING_OUT_TEST){
     const std::string mode="administrador";
     const std::string username="myUser";
 
-    Person *testPerson=new Person(1,21,firstName,lastName,password,username,mode);
+    Person *testPerson=new Person(1,firstName,lastName,password,username,mode);
     testPerson->setLoggedIn();    
     testPerson->setLoggedOut();
     state= testPerson->getLoggedIn();

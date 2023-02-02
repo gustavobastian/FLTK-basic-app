@@ -140,10 +140,8 @@ void users_Window::search_cb(Fl_Widget* w,void* data){
     std::string localId=ss.str();
 
     const std::string myUser=myWindow->localDB->findElement("users","id",localId);
-    //std::cout<<"user:"<<myUser<<std::endl;
+    std::cout<<"user:"<<myUser<<std::endl;
     Person *localUser= new Person(&myUser);
-
-    localUser->printData();
 
     const char *one=(localUser->getFirstName()).c_str();
     const char *two=(localUser->getLastName()).c_str();
@@ -164,6 +162,10 @@ void users_Window::search_cb(Fl_Widget* w,void* data){
     myWindow->search->hide();
     myWindow->create->hide();
     myWindow->quit->show();
+    free((void *)one);
+    free((void *)two);
+    free((void *)three);
+    
     myWindow->redraw();
 }
 

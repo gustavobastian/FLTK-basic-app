@@ -3,13 +3,29 @@
 #include <vector>
 #include <sstream>
 
-Person::Person():id(0),age(0),lastname(""),firstname(""),password(""),isLoggedIn(false){};
+Person::Person():id(0),lastname(""),firstname(""),password(""),isLoggedIn(false){};
+
 void Person::printData(){
-    std::cout<<"Id:"<<this->id<<"\n";
-    std::cout<<"Age:"<<this->age<<"\n";
+    
+    try {
+    std::cout<<"Id:"<<this->id<<"\n";    
+    
+    
+    
     std::cout<<"Firstname:"<<this->firstname<<"\n";
+    
+    
     std::cout<<"Lastname:"<<this->lastname<<"\n";
+
+    std::cout<<"Username:"<<this->username<<"\n";
+    
+    
     std::cout<<"Password:"<<this->password<<"\n";
+    }
+    catch (const std::exception& e){
+        std::cout<<e.what()<<std::endl;
+    }
+    
 };
 
 Person::Person(const std::string *a){
@@ -31,7 +47,9 @@ Person::Person(const std::string *a){
     for (auto it = personValues.begin();it != personValues.end();++it){
         std::cout<<"Value:"<<*it<<std::endl;
     }
+    
     if(personValues.size()<6){
+        this->id=0;
         this->firstname="";
         this->lastname="";
         this->mode="";
