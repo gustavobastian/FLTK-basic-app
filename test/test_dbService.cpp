@@ -109,6 +109,46 @@ TEST(DBCREATION, TABLEDROP){
 
 
 
+ TEST(DBINSERTION, RETRIEVE_MULTIPLE_ELEMENTS){
+    std::string  data("../../data/generalDB.db");
+    auto *myDb= new databaseService(data);
+    myDb->openDB();
+
+    std::vector <std::string> columns;
+    
+    //table for test
+    columns.push_back("id INTEGER PRIMARY KEY");
+    columns.push_back("firstname TEXT");
+    columns.push_back("lastname TEXT");
+    columns.push_back("age INTEGER");
+
+    //element for test
+    std::string value= "1, 'Pedro','Perez',20 ";
+    std::string value_2= "2, 'Juan','Perez',22 ";
+    //creation
+    auto output = myDb->createTable("myTable",columns);    
+    EXPECT_EQ(output,0);
+    
+    //test
+
+    auto output1 = myDb->insertElementTable(value,"myTable");
+    EXPECT_EQ(output1,0);
+    auto output2 = myDb->insertElementTable(value_2,"myTable");
+    EXPECT_EQ(output2,0);
+
+    auto output3 = myDb->getAllElement("myTable",3);
+    std::cout<<"received:"<<output3<<endl;
+
+    //cleaning
+    auto output4 = myDb->dropTable("myTable");
+    EXPECT_EQ(output4,0);
+
+    vector<std::string>().swap(columns);
+    delete myDb;
+ } 
+
+
+
 
 
 

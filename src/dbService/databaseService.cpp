@@ -113,11 +113,11 @@ int databaseService::dropTable(std::string tableName){
 };
 
 /**
- * @brief 
+ * @brief Inserting a row to a database table
  * 
- * @param Element 
- * @param tableName 
- * @return int 
+ * @param Element string with values to insert into the table
+ * @param tableName name of the table
+ * @return int 0:success, -1:error
  */
 int databaseService::insertElementTable(std::string Element,std::string tableName){
     
@@ -131,6 +131,14 @@ int databaseService::insertElementTable(std::string Element,std::string tableNam
 
     return 0;
 };
+/**
+ * @brief find elements by tag
+ * 
+ * @param tableName name of table
+ * @param elementTag name of column
+ * @param elementValue value of column
+ * @return std::string with information of the row found
+ */
 
 std::string databaseService::findElement(std::string tableName, std::string elementTag, std::string elementValue){
 
@@ -154,22 +162,30 @@ std::string databaseService::findElement(std::string tableName, std::string elem
         {        
             ss<<  reinterpret_cast<const char *>(sqlite3_column_text(stmt, i))<< ",";
         }    
-        ss<<("|");
+        ss<<(";");
         
     }
     output=ss.str();
-
+    output.at(output.size()-2)=0x20;
     sqlite3_finalize(stmt);
 
     return output;
 };
-
-std::string databaseService::getAllElement(){    
+/**
+ * @brief returns all elements from a table
+ * 
+ * @param tableName Table name
+ * @param limit maximum number of rows to return
+ * @return std::string : string with table rows separated by ";" and columns by "," => value1,value2, ...; value11,value22,...; 
+ */
+std::string databaseService::getAllElement(std::string tableName, unsigned int limit){    
     std::stringstream ss;
-
-
+    ss<<limit;
+    std::string limitS=ss.str();
     std::string output;
-    std::string sql = "SELECT name, age FROM person WHERE id = 1;";
+    ss.str("");
+    std::string sql = "SELECT * FROM "+ tableName +" LIMIT " +limitS+";";
+    std::cout<<sql<<std::endl;
     sqlite3_stmt *stmt;
     rc = sqlite3_prepare_v2(db, sql.c_str(), -1, &stmt, NULL);
 
@@ -181,12 +197,18 @@ std::string databaseService::getAllElement(){
 
     rc = sqlite3_step(stmt);
 
-    if (rc == SQLITE_ROW) {
-        std::string name = reinterpret_cast<const char *>(sqlite3_column_text(stmt, 0));
-        int age = sqlite3_column_int(stmt, 1);
-        //std::cout << "Name: " << name << ", Age: " << age << std::endl;
-        ss<< "Name: " << name << ", Age: " << age << std::endl;
-        output=ss.str();
+    while (rc == SQLITE_ROW) {
+
+        for(unsigned int i=0;i<sqlite3_data_count(stmt);i++)
+        {        
+            ss<<  reinterpret_cast<const char *>(sqlite3_column_text(stmt, i))<< ",";
+        }    
+        ss<<(";");
+        output+=ss.str();
+        ss.str("");
+        output.at(output.size()-2)=0x20;        
+
+        rc = sqlite3_step(stmt);
     }
 
     sqlite3_finalize(stmt);
@@ -237,7 +259,10 @@ bool databaseService::validateUser(std::string username, std::string password)
             }        
     }
 };
- 
+ /**
+  * @brief Destroy the database Service::database Service object
+  * 
+  */
 databaseService::~databaseService(){
     sqlite3_close(this->db);
 }

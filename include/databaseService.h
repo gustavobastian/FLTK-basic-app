@@ -38,7 +38,7 @@ class databaseService {
     int dropTable(std::string tableName);
     int insertElementTable(std::string Element, std::string tableName);
     std::string findElement(std::string tableName, std::string elementTag, std::string elementValue);
-    std::string getAllElement();
+    std::string getAllElement(std::string tableName, unsigned int limit);
     ~databaseService();
 
     //login services
