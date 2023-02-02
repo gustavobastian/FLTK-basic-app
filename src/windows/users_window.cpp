@@ -141,11 +141,11 @@ void users_Window::search_cb(Fl_Widget* w,void* data){
 
     const std::string myUser=myWindow->localDB->findElement("users","id",localId);
     std::cout<<"user:"<<myUser<<std::endl;
-    Person *localUser= new Person(&myUser);
+    myWindow->localUser= new Person(&myUser);
 
-    const char *one=(localUser->getFirstName()).c_str();
-    const char *two=(localUser->getLastName()).c_str();
-    const char *three=(localUser->getPassword()).c_str();
+    const char *one=(myWindow->localUser->getFirstName()).c_str();
+    const char *two=(myWindow->localUser->getLastName()).c_str();
+    const char *three=(myWindow->localUser->getPassword()).c_str();
 
     myWindow->firstNameInput->value(one);
     myWindow->lastNameInput->value(two);
@@ -162,10 +162,8 @@ void users_Window::search_cb(Fl_Widget* w,void* data){
     myWindow->search->hide();
     myWindow->create->hide();
     myWindow->quit->show();
-    free((void *)one);
-    free((void *)two);
-    free((void *)three);
     
+    myWindow->localUser->clearData();
     myWindow->redraw();
 }
 

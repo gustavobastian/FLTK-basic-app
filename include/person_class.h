@@ -137,6 +137,12 @@ class Person{
          * 
          */
         void printData();
+
+        /**
+         * @brief set all the properties of the person as default
+         * 
+         */
+        void clearData();
         ~Person();
 };
 

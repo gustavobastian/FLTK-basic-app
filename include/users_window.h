@@ -12,6 +12,7 @@
 #include <FL/Fl_Int_Input.H>
 #include <FL/Fl_Multiline_Output.H>
 #include <databaseService.h>
+#include <person_class.h>
 
 /**
  * @file users_window.h
@@ -38,6 +39,8 @@ class users_Window:public Fl_Group
         databaseService *localDB;
         Fl_Box *labelId ;
         Fl_Int_Input *idInput;
+
+        Person *localUser;
 
         Fl_Box *labelFirstName ;
         Fl_Int_Input *firstNameInput;

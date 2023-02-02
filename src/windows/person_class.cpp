@@ -67,4 +67,14 @@ Person::Person(const std::string *a){
 
 }
 
+void Person::clearData(){
+    this->id=0;
+    this->firstname="";
+    this->lastname="";
+    this->mode="";
+    this->username="";
+    this->password="";
+
+}
+
 Person::~Person(){}
