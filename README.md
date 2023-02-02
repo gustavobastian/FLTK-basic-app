@@ -16,6 +16,7 @@ Download gtest from the repository https://github.com/google/googletest and deco
 
 Execute :
 ```
+sudo apt install cmake
 pip install conan
 
 mkdir build
