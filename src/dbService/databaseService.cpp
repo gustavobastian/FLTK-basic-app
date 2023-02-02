@@ -166,7 +166,7 @@ std::string databaseService::findElement(std::string tableName, std::string elem
         
     }
     output=ss.str();
-    output.at(output.size()-2)=0x20;
+   // output.at(output.size()-2)=0x20;
     sqlite3_finalize(stmt);
 
     return output;
@@ -206,7 +206,7 @@ std::string databaseService::getAllElement(std::string tableName, unsigned int l
         ss<<(";");
         output+=ss.str();
         ss.str("");
-        output.at(output.size()-2)=0x20;        
+      //  output.at(output.size()-2)=0x20;        
 
         rc = sqlite3_step(stmt);
     }

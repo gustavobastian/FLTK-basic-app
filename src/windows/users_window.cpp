@@ -3,6 +3,7 @@
 #include <iostream>
 #include <sstream>
 #include <FL/fl_ask.H>
+#include <person_class.h>
 
 
 /*
@@ -84,7 +85,11 @@ users_Window::users_Window(int w, int h, int data, databaseService *localDB, boo
     update = new Fl_Button( w-125,240,90,25,"Update");  
     update->color(FL_DARK_CYAN);  
     update->callback(this->update_cb,(void*)(this));                          
-    
+
+    quit = new Fl_Button( w-125,280,90,25,"Quit");  
+    quit->color(FL_DARK_CYAN);  
+    quit->callback(this->quit_cb,(void*)(this));                          
+    quit->hide();
     this->end();
 }
 /**
@@ -120,6 +125,7 @@ int users_Window::set_value(unsigned int valueP) {
 
 void users_Window::search_cb(Fl_Widget* w,void* data){  
     users_Window *myWindow = (users_Window*)data;          
+    
 
     if(*(myWindow->get_authorization())==false){
         std::cout<<"first needs login..."<<std::endl;
@@ -133,9 +139,21 @@ void users_Window::search_cb(Fl_Widget* w,void* data){
     ss<<myWindow->idInput->value();
     std::string localId=ss.str();
 
-    std::string myUser=myWindow->localDB->findElement("users","id",localId);
-    std::cout<<"user:"<<myUser<<std::endl;
+    const std::string myUser=myWindow->localDB->findElement("users","id",localId);
+    //std::cout<<"user:"<<myUser<<std::endl;
+    Person *localUser= new Person(&myUser);
 
+    localUser->printData();
+
+    const char *one=(localUser->getFirstName()).c_str();
+    const char *two=(localUser->getLastName()).c_str();
+    const char *three=(localUser->getPassword()).c_str();
+
+    myWindow->firstNameInput->value(one);
+    myWindow->lastNameInput->value(two);
+    myWindow->passwordInput->value(three);
+
+    
     myWindow->labelFirstName->show();
     myWindow->firstNameInput->show();
     myWindow->labelLastName->show();
@@ -143,7 +161,9 @@ void users_Window::search_cb(Fl_Widget* w,void* data){
     myWindow->labelPassword->show();
     myWindow->passwordInput->show();
     
-    
+    myWindow->search->hide();
+    myWindow->create->hide();
+    myWindow->quit->show();
     myWindow->redraw();
 }
 
@@ -173,5 +193,33 @@ void users_Window::update_cb(Fl_Widget* w,void* data){
     std::cout<<"updating...."<<std::endl;
     
 }
+
+void users_Window::quit_cb(Fl_Widget* w,void* data){  
+    users_Window *myWindow = (users_Window*)data;          
+
+    if(*(myWindow->get_authorization())==false){
+        std::cout<<"first needs login..."<<std::endl;
+        fl_alert("Not Logged!, first needs login...");        
+        return;
+    } 
+    
+    std::cout<<"quitting...."<<std::endl;
+
+
+    
+    myWindow->labelFirstName->hide();
+    myWindow->firstNameInput->hide();
+    myWindow->labelLastName->hide();
+    myWindow->lastNameInput->hide();
+    myWindow->labelPassword->hide();
+    myWindow->passwordInput->hide();
+    
+    myWindow->search->show();
+    myWindow->create->show();
+    myWindow->quit->hide();
+    myWindow->redraw();
+    
+}
+
 
 users_Window::~users_Window(){ }

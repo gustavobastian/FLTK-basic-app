@@ -35,6 +35,7 @@ class Person{
         bool isLoggedIn;
     public:
         Person();
+        Person(const std::string *a);
         Person(int x, int y, const std::string& a ,
         const std::string& n,const std::string& f ,
         const std::string& e,const std::string& s ):id(x),

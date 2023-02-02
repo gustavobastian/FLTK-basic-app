@@ -49,6 +49,7 @@ class users_Window:public Fl_Group
         Fl_Button *search ; 
         Fl_Button *create ; 
         Fl_Button *update ; 
+        Fl_Button *quit ; 
         
         bool *authorization;
     public:
@@ -60,6 +61,7 @@ class users_Window:public Fl_Group
         static void search_cb(Fl_Widget* w,void* data);      
         static void create_cb(Fl_Widget* w,void* data);      
         static void update_cb(Fl_Widget* w,void* data);      
+        static void quit_cb(Fl_Widget* w,void* data);      
         
 
         bool *get_authorization(){ return this->authorization; }  
