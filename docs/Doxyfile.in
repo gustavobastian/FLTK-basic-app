@@ -1,2 +1,3 @@
+PROJECT_NAME = "Simple App with sqlite3 and FLTK"
 OUTPUT_DIRECTORY       = @CMAKE_CURRENT_BINARY_DIR@/doc_doxygen/
-INPUT                  = @CMAKE_CURRENT_SOURCE_DIR@/include @CMAKE_CURRENT_SOURCE_DIR@/../docs
+INPUT                  = @CMAKE_CURRENT_SOURCE_DIR@/include @CMAKE_CURRENT_SOURCE_DIR@/docs
