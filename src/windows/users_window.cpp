@@ -5,7 +5,6 @@
 #include <FL/fl_ask.H>
 #include <person_class.h>
 
-
 /*
 constructors for the page
 */
@@ -22,11 +21,10 @@ users_Window::users_Window(int x, int y):Fl_Group(10,35,x-10,y-35,"Users")
 
     search = new Fl_Button( 250,160,90,25,"Search"); 
     search->color(FL_DARK_CYAN);                
-    
-    
-    
+           
     this->end();
 }
+
 users_Window::users_Window(int w, int h, int data, databaseService *localDB, bool *state):Fl_Group(10,35,w-10,h-35,"Users")
 {
     this->set_authorization(state);
@@ -53,20 +51,20 @@ users_Window::users_Window(int w, int h, int data, databaseService *localDB, boo
     */
     labelLastName = new Fl_Box(40,175,25,25,"LastName:");
     labelLastName->hide();
-    lastNameInput = new Fl_Int_Input( 100,175,150,25);
+    lastNameInput = new Fl_Input( 100,175,150,25);
     lastNameInput->hide();
     /*first Name input
     */
     labelFirstName = new Fl_Box(40,210,25,25,"FirstName:");
     labelFirstName->hide();
-    firstNameInput = new Fl_Int_Input( 100,210,150,25);
+    firstNameInput = new Fl_Input( 100,210,150,25);
     firstNameInput->hide();
         
     /*password
     */
     labelPassword = new Fl_Box(40,245,25,25,"Password:");
     labelPassword->hide();
-    passwordInput = new Fl_Int_Input( 100,245,150,25);
+    passwordInput = new Fl_Input( 100,245,150,25);
     passwordInput->hide();
     
     /*Search button
@@ -133,14 +131,13 @@ void users_Window::search_cb(Fl_Widget* w,void* data){
         return;
     }
  
-    std::cout<<"searching...."<<std::endl;
-    //std::cout<<"id:"<<myWindow->idInput->value()<<std::endl;
+ 
     std::stringstream ss;
     ss<<myWindow->idInput->value();
     std::string localId=ss.str();
 
     const std::string myUser=myWindow->localDB->findElement("users","id",localId);
-    std::cout<<"user:"<<myUser<<std::endl;
+    
     myWindow->localUser= new Person(&myUser);
 
     const char *one=(myWindow->localUser->getFirstName()).c_str();
@@ -168,7 +165,8 @@ void users_Window::search_cb(Fl_Widget* w,void* data){
 }
 
 void users_Window::create_cb(Fl_Widget* w,void* data){  
-    users_Window *myWindow = (users_Window*)data;          
+    users_Window *myWindow = (users_Window*)data;  
+    std::stringstream ss;        
 
     if(*(myWindow->get_authorization())==false){
         std::cout<<"first needs login..."<<std::endl;
@@ -178,8 +176,25 @@ void users_Window::create_cb(Fl_Widget* w,void* data){
     
     std::cout<<"creating...."<<std::endl;
 
-    long newIndex = myWindow->localDB->getLastIndex("users");
-    std::cout<<"last index="<<newIndex+1<<std::endl;
+    long newIndex = (myWindow->localDB->getLastIndex("users"))+1;
+    ss<<newIndex;
+    std::string temp=ss.str();
+    const char *one=(const char*)temp.c_str();
+    myWindow->idInput->value(one);
+
+    myWindow->labelFirstName->show();
+    myWindow->firstNameInput->show();
+    myWindow->labelLastName->show();
+    myWindow->lastNameInput->show();
+    myWindow->labelPassword->show();
+    myWindow->passwordInput->show();
+    
+    myWindow->search->hide();
+    myWindow->create->hide();
+    myWindow->quit->show();
+    
+    
+    myWindow->redraw();
     
 }
 

@@ -10,6 +10,7 @@
 #include <FL/Fl_JPEG_Image.H>
 #include <FL/Fl_Box.H>
 #include <FL/Fl_Int_Input.H>
+#include <FL/Fl_Input.H>
 #include <FL/Fl_Multiline_Output.H>
 #include <databaseService.h>
 #include <person_class.h>
@@ -43,11 +44,11 @@ class users_Window:public Fl_Group
         Person *localUser;
 
         Fl_Box *labelFirstName ;
-        Fl_Int_Input *firstNameInput;
+        Fl_Input *firstNameInput;
         Fl_Box *labelLastName ;
-        Fl_Int_Input *lastNameInput;
+        Fl_Input *lastNameInput;
         Fl_Box *labelPassword ;
-        Fl_Int_Input *passwordInput;
+        Fl_Input *passwordInput;
 
         Fl_Button *search ; 
         Fl_Button *create ; 

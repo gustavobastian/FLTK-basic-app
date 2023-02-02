@@ -100,7 +100,6 @@ int databaseService::dropTable(std::string tableName){
          std::cout  << "Error dropping table: no tablename" << std::endl;
         return -1;
     }
-
       // create a table
     std::string sql = "drop TABLE "+ tableName ;
     rc = sqlite3_exec(db, sql.c_str()  , NULL, 0, NULL);

@@ -9,16 +9,12 @@ void Person::printData(){
     
     try {
     std::cout<<"Id:"<<this->id<<"\n";    
-    
-    
-    
+      
     std::cout<<"Firstname:"<<this->firstname<<"\n";
-    
-    
+        
     std::cout<<"Lastname:"<<this->lastname<<"\n";
 
-    std::cout<<"Username:"<<this->username<<"\n";
-    
+    std::cout<<"Username:"<<this->username<<"\n";    
     
     std::cout<<"Password:"<<this->password<<"\n";
     }
@@ -36,18 +32,15 @@ Person::Person(const std::string *a){
             localString.at(i) = 0x20;
         }
     }
-    std::cout<<"Value:"<<localString<<std::endl;  
+    
     std::vector<std::string> personValues;
     std::istringstream ss(localString);
     std::string token;
+    
     while (std::getline(ss, token,',')){
         personValues.push_back(token);
     };
-    
-    for (auto it = personValues.begin();it != personValues.end();++it){
-        std::cout<<"Value:"<<*it<<std::endl;
-    }
-    
+        
     if(personValues.size()<6){
         this->id=0;
         this->firstname="";

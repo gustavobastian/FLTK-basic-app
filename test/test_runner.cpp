@@ -103,8 +103,7 @@ TEST(PersonClassTest, GENERATING_DB_DATA){
     std::string response=testPerson->generateStringDB();
     std::cout<<"response:"<<response<<std::endl;
     std::cout<<"value   :"<<value<<std::endl;
-    EXPECT_EQ(value,response);
-    
+    EXPECT_EQ(value,response);    
 
     delete testPerson;    
 }
