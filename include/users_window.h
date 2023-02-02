@@ -38,6 +38,14 @@ class users_Window:public Fl_Group
         databaseService *localDB;
         Fl_Box *labelId ;
         Fl_Int_Input *idInput;
+
+        Fl_Box *labelFirstName ;
+        Fl_Int_Input *firstNameInput;
+        Fl_Box *labelLastName ;
+        Fl_Int_Input *lastNameInput;
+        Fl_Box *labelPassword ;
+        Fl_Int_Input *passwordInput;
+
         Fl_Button *search ; 
         Fl_Button *create ; 
         Fl_Button *update ; 
