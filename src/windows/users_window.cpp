@@ -222,4 +222,6 @@ void users_Window::quit_cb(Fl_Widget* w,void* data){
 }
 
 
-users_Window::~users_Window(){ }
+users_Window::~users_Window(){ 
+    delete this->localUser;
+}
