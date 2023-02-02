@@ -77,4 +77,15 @@ void Person::clearData(){
 
 }
 
+
+std::string Person::generateStringDB(){
+    std::string output="";    
+    std::stringstream ss;
+
+    ss<<this->id<<",'"<<this->firstname<<"','"<<this->lastname<<"','"<<this->mode<<"','"<<this->username<<"','"<<this->password<<"'";
+    output=ss.str();
+    return output;
+
+}
+
 Person::~Person(){}

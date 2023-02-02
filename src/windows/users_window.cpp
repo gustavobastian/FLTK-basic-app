@@ -134,7 +134,7 @@ void users_Window::search_cb(Fl_Widget* w,void* data){
     }
  
     std::cout<<"searching...."<<std::endl;
-    std::cout<<"id:"<<myWindow->idInput->value()<<std::endl;
+    //std::cout<<"id:"<<myWindow->idInput->value()<<std::endl;
     std::stringstream ss;
     ss<<myWindow->idInput->value();
     std::string localId=ss.str();
@@ -178,6 +178,8 @@ void users_Window::create_cb(Fl_Widget* w,void* data){
     
     std::cout<<"creating...."<<std::endl;
 
+    long newIndex = myWindow->localDB->getLastIndex("users");
+    std::cout<<"last index="<<newIndex+1<<std::endl;
     
 }
 
@@ -223,5 +225,5 @@ void users_Window::quit_cb(Fl_Widget* w,void* data){
 
 
 users_Window::~users_Window(){ 
-    delete this->localUser;
+    //delete this->localUser;
 }

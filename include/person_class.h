@@ -143,6 +143,14 @@ class Person{
          * 
          */
         void clearData();
+
+        /**
+         * @brief generate string object in order to insert the person in the database
+         * 
+         * @return std::string objet to pass as parameter to the databaseService function
+         */
+        std::string generateStringDB();
+
         ~Person();
 };
 

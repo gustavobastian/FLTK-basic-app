@@ -66,6 +66,7 @@ TEST(PersonClassTest, LOGGING_IN_TEST){
 
     delete testPerson;
 }
+
 TEST(PersonClassTest, LOGGING_OUT_TEST){
     bool state(false);
     const std::string firstName="jhon";
@@ -83,6 +84,31 @@ TEST(PersonClassTest, LOGGING_OUT_TEST){
 
     delete testPerson;    
 }
+
+
+TEST(PersonClassTest, GENERATING_DB_DATA){
+    bool state(false);
+    std::stringstream ss;
+    const std::string firstName="jhon";
+    const std::string lastName="jhonP";
+    const std::string password="jhonPP";
+    const std::string mode="admin";
+    const std::string username="myUser";
+
+    Person *testPerson=new Person(1,firstName,lastName,password,username,mode);
+    
+    //std::string value="1,'jhon','jhonP','admin','myUser','jhonPP'";
+    ss<<"1,"<<"'jhon'"<<','<<"'jhonP'"<<','<<"'admin'"<<','<<"'myUser'"<<','<<"'jhonPP'";
+    std::string value=ss.str();
+    std::string response=testPerson->generateStringDB();
+    std::cout<<"response:"<<response<<std::endl;
+    std::cout<<"value   :"<<value<<std::endl;
+    EXPECT_EQ(value,response);
+    
+
+    delete testPerson;    
+}
+
 int main(int argc, char **argv) {
 
     testing::InitGoogleTest(&argc, argv);

@@ -168,7 +168,7 @@ std::string databaseService::findElement(std::string tableName, std::string elem
     output=ss.str();
    // output.at(output.size()-2)=0x20;
     sqlite3_finalize(stmt);
-
+    
     return output;
 };
 /**
@@ -179,6 +179,9 @@ std::string databaseService::findElement(std::string tableName, std::string elem
  * @return std::string : string with table rows separated by ";" and columns by "," => value1,value2, ...; value11,value22,...; 
  */
 std::string databaseService::getAllElement(std::string tableName, unsigned int limit){    
+
+    if(tableName.size()==0){return "error";}
+    if(limit ==0){return "error";}
     std::stringstream ss;
     ss<<limit;
     std::string limitS=ss.str();
@@ -209,7 +212,7 @@ std::string databaseService::getAllElement(std::string tableName, unsigned int l
     }
 
     sqlite3_finalize(stmt);
-
+    
     return output;
 };
 
@@ -256,6 +259,38 @@ bool databaseService::validateUser(std::string username, std::string password)
             }        
     }
 };
+
+long databaseService::getLastIndex(std::string tableName){
+    long output;
+    std::stringstream ss;
+    if(tableName.size()==0){return 0;}
+    std::string sql = "SELECT id FROM "+ tableName +" ORDER BY id DESC LIMIT 1;";
+
+    sqlite3_stmt *stmt;
+    rc = sqlite3_prepare_v2(db, sql.c_str(), -1, &stmt, NULL);
+
+    if (rc != SQLITE_OK) {
+        std::cout << "Error querying table: " << sqlite3_errmsg(db) << std::endl;        
+        return 0;
+    }
+
+    rc = sqlite3_step(stmt);
+
+    if (rc == SQLITE_ROW) {
+
+           
+         ss<<  reinterpret_cast<const char *>(sqlite3_column_text(stmt, 0));
+        
+    }
+    
+    std::string data=ss.str();
+    output=stoi(data);
+   
+    sqlite3_finalize(stmt);
+    
+    return output;
+}
+
  /**
   * @brief Destroy the database Service::database Service object
   * 

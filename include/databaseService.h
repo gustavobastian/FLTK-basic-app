@@ -39,10 +39,13 @@ class databaseService {
     int insertElementTable(std::string Element, std::string tableName);
     std::string findElement(std::string tableName, std::string elementTag, std::string elementValue);
     std::string getAllElement(std::string tableName, unsigned int limit);
+    long getLastIndex(std::string tableName);
+
     ~databaseService();
 
     //login services
     bool validateUser(std::string username, std::string password);
+
 
 };
 #endif // !1
