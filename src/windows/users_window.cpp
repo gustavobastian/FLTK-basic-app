@@ -1,9 +1,9 @@
-#include <users_window.h>
-#include <databaseService.h>
 #include <iostream>
 #include <sstream>
 #include <FL/fl_ask.H>
 #include <person_class.h>
+#include <users_window.h>
+#include <databaseService.h>
 
 /*
 constructors for the page
@@ -205,7 +205,7 @@ void users_Window::search_cb(Fl_Widget* w,void* data){
     myWindow->quit->show();
     myWindow->send->show();
     
-    //myWindow->localUser->clearData();
+    
     myWindow->redraw();
 }
 
