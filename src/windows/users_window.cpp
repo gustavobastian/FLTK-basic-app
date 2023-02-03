@@ -83,7 +83,7 @@ users_Window::users_Window(int w, int h, int data, databaseService *localDB, boo
 
     /*username
     */
-    labelUsername = new Fl_Box(40,315,25,25,"username:");
+    labelUsername = new Fl_Box(40,315,25,25,"Username:");
     labelUsername->hide();
     usernameInput = new Fl_Input( 100,315,150,25);
     usernameInput->callback(this->update_username_cb,(void*)this);
@@ -161,8 +161,8 @@ void users_Window::search_cb(Fl_Widget* w,void* data){
     
 
     if(*(myWindow->get_authorization())==false){
-        std::cout<<"first needs login..."<<std::endl;
-        fl_alert("Not Logged!, first needs login...");        
+        std::cout<<"Needs login..."<<std::endl;
+        fl_alert("Not Logged!, needs login...");        
         return;
     }
  
@@ -217,8 +217,8 @@ void users_Window::create_cb(Fl_Widget* w,void* data){
 
     myWindow->localUser->clearData();
     if(*(myWindow->get_authorization())==false){
-        std::cout<<"first needs login..."<<std::endl;
-        fl_alert("Not Logged!, first needs login...");        
+        std::cout<<"Needs login..."<<std::endl;
+        fl_alert("Not Logged!, needs login...");        
         return;
     } 
     
@@ -255,8 +255,8 @@ void users_Window::update_cb(Fl_Widget* w,void* data){
     users_Window *myWindow = (users_Window*)data;          
     myWindow->modeUpdate=true;
     if(*(myWindow->get_authorization())==false){
-        std::cout<<"first needs login..."<<std::endl;
-        fl_alert("Not Logged!, first needs login...");        
+        std::cout<<"Needs login..."<<std::endl;
+        fl_alert("Not Logged!, needs login...");        
         return;
     } 
     std::string dataDB=myWindow->localUser->generateStringDB();
@@ -268,7 +268,7 @@ void users_Window::quit_cb(Fl_Widget* w,void* data){
 
     if(*(myWindow->get_authorization())==false){
         std::cout<<"first needs login..."<<std::endl;
-        fl_alert("Not Logged!, first needs login...");        
+        fl_alert("Not Logged!, needs login...");        
         return;
     } 
     
@@ -358,7 +358,14 @@ void users_Window::send_cb(Fl_Widget* w,void* data){
     std::cout<<"updating....:"<<dataDB<<std::endl;
 
     if(myWindow->modeUpdate==false){
-        myWindow->localDB->insertElementTable(dataDB,"users");
+        int returned = myWindow->localDB->insertElementTable(dataDB,"users");
+        if(returned ==-1)
+            {
+                fl_alert("Error inserting user into db!\n");
+            }
+        else{
+                fl_alert("User inserted!\n");
+            }    
     }
 
 }
