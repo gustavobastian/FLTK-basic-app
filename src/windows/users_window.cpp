@@ -29,6 +29,7 @@ users_Window::users_Window(int w, int h, int data, databaseService *localDB, boo
 {
     this->set_authorization(state);
     
+    this->localUser= new Person();
 
     if(localDB == NULL){
         std::cerr<<"no database!\n";
@@ -138,8 +139,8 @@ void users_Window::search_cb(Fl_Widget* w,void* data){
 
     const std::string myUser=myWindow->localDB->findElement("users","id",localId);
     
-    myWindow->localUser= new Person(&myUser);
-
+    myWindow->localUser->setData(&myUser);
+   
     const char *one=(myWindow->localUser->getFirstName()).c_str();
     const char *two=(myWindow->localUser->getLastName()).c_str();
     const char *three=(myWindow->localUser->getPassword()).c_str();
@@ -240,5 +241,5 @@ void users_Window::quit_cb(Fl_Widget* w,void* data){
 
 
 users_Window::~users_Window(){ 
-    //delete this->localUser;
+    delete this->localUser;
 }

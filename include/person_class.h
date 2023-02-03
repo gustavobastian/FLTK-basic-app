@@ -151,6 +151,8 @@ class Person{
          */
         std::string generateStringDB();
 
+        int setData(const std::string *a);
+
         ~Person();
 };
 
