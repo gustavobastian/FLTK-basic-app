@@ -49,6 +49,10 @@ class users_Window:public Fl_Group
         Fl_Input *lastNameInput;
         Fl_Box *labelPassword ;
         Fl_Input *passwordInput;
+        Fl_Box *labelMode ;
+        Fl_Input *modeInput;
+        Fl_Box *labelUsername ;
+        Fl_Input *usernameInput;
 
         Fl_Button *search ; 
         Fl_Button *create ; 
@@ -70,7 +74,15 @@ class users_Window:public Fl_Group
 
         bool *get_authorization(){ return this->authorization; }  
         void set_authorization(bool *_state);
+
+        static void update_pass_cb(Fl_Widget* w,void* data);        
+        static void update_firstName_cb(Fl_Widget* w,void* data);        
+        static void update_lastName_cb(Fl_Widget* w,void* data);        
+        static void update_mode_cb(Fl_Widget* w,void* data);        
+        static void update_username_cb(Fl_Widget* w,void* data);        
+
         ~users_Window();
+
 };
 
 #endif

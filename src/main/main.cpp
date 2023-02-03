@@ -1,6 +1,5 @@
 #include <iostream>
 #include <string>
-
 #include <FL/Fl.H>
 #include <FL/Fl_Window.H>
 #include <FL/Fl_Tabs.H>
@@ -13,6 +12,7 @@
 #include <FL/Fl_Multiline_Output.H>
 #include <FL/fl_ask.H>
 
+
 #include <login_window.h>
 #include <stock_window.h>
 #include <products_window.h>
@@ -23,14 +23,17 @@
 #include <sqlite3.h>
 #include <definitions.h>
 
+
+
 /**
  * @brief main logout callback
  * 
  * @param w 
  * @param data 
  */
-static void logout_cb(Fl_Widget* w,void* data){
+void logout_cb(Fl_Widget* w,void* data){
     auto *mystate= (bool*)data;
+    
 
     if(*mystate==false)
     {
@@ -45,17 +48,19 @@ static void logout_cb(Fl_Widget* w,void* data){
 
 }  
 
-
 int main(int argc, char **argv) {    
     
     std::string  data(dBAddress);
     auto *myDb= new databaseService(data);
     myDb->openDB();
-   
+    
     
     //windows parameters
     auto w=W_Width;
     auto h=W_Height;
+
+
+
 
     //TODO replace with person
     auto state=false;
@@ -105,7 +110,9 @@ int main(int argc, char **argv) {
 
     win->end();
     win->show();
-    
+
+
+
     int retval = 1;
     if (Fl::run()){
        return retval = 0;

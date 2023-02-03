@@ -17,6 +17,8 @@ void Person::printData(){
     std::cout<<"Username:"<<this->username<<"\n";    
     
     std::cout<<"Password:"<<this->password<<"\n";
+    
+    std::cout<<"Mode:"<<this->mode<<"\n";
     }
     catch (const std::exception& e){
         std::cout<<e.what()<<std::endl;

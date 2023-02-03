@@ -53,12 +53,14 @@ users_Window::users_Window(int w, int h, int data, databaseService *localDB, boo
     labelLastName = new Fl_Box(40,175,25,25,"LastName:");
     labelLastName->hide();
     lastNameInput = new Fl_Input( 100,175,150,25);
+    lastNameInput->callback(this->update_lastName_cb,(void*)this);
     lastNameInput->hide();
     /*first Name input
     */
     labelFirstName = new Fl_Box(40,210,25,25,"FirstName:");
-    labelFirstName->hide();
+    labelFirstName->hide();    
     firstNameInput = new Fl_Input( 100,210,150,25);
+    firstNameInput->callback(this->update_firstName_cb,(void*)this);
     firstNameInput->hide();
         
     /*password
@@ -66,8 +68,28 @@ users_Window::users_Window(int w, int h, int data, databaseService *localDB, boo
     labelPassword = new Fl_Box(40,245,25,25,"Password:");
     labelPassword->hide();
     passwordInput = new Fl_Input( 100,245,150,25);
+    passwordInput->callback(this->update_pass_cb,(void*)this);
     passwordInput->hide();
     
+    /*Mode
+    */
+    labelMode = new Fl_Box(40,280,25,25,"Mode:");
+    labelMode->hide();
+    modeInput = new Fl_Input( 100,280,150,25);
+    modeInput->callback(this->update_mode_cb,(void*)this);
+    modeInput->hide();
+    
+
+
+    /*username
+    */
+    labelUsername = new Fl_Box(40,315,25,25,"username:");
+    labelUsername->hide();
+    usernameInput = new Fl_Input( 100,315,150,25);
+    usernameInput->callback(this->update_username_cb,(void*)this);
+    usernameInput->hide();
+    
+
     /*Search button
     */
     search = new Fl_Button( w-125,160,90,25,"Search"); 
@@ -144,24 +166,32 @@ void users_Window::search_cb(Fl_Widget* w,void* data){
     const char *one=(myWindow->localUser->getFirstName()).c_str();
     const char *two=(myWindow->localUser->getLastName()).c_str();
     const char *three=(myWindow->localUser->getPassword()).c_str();
+    const char *four=(myWindow->localUser->getUsername()).c_str();
+    const char *five=(myWindow->localUser->getMode()).c_str();
 
     myWindow->firstNameInput->value(one);
     myWindow->lastNameInput->value(two);
     myWindow->passwordInput->value(three);
+    myWindow->usernameInput->value(four);
+    myWindow->modeInput->value(five);
 
-    
+    myWindow->idInput->deactivate();
     myWindow->labelFirstName->show();
     myWindow->firstNameInput->show();
     myWindow->labelLastName->show();
     myWindow->lastNameInput->show();
     myWindow->labelPassword->show();
     myWindow->passwordInput->show();
+    myWindow->labelMode->show();
+    myWindow->modeInput->show();
+    myWindow->labelUsername->show();
+    myWindow->usernameInput->show();
     
     myWindow->search->hide();
     myWindow->create->hide();
     myWindow->quit->show();
     
-    myWindow->localUser->clearData();
+    //myWindow->localUser->clearData();
     myWindow->redraw();
 }
 
@@ -169,6 +199,7 @@ void users_Window::create_cb(Fl_Widget* w,void* data){
     users_Window *myWindow = (users_Window*)data;  
     std::stringstream ss;        
 
+    myWindow->localUser->clearData();
     if(*(myWindow->get_authorization())==false){
         std::cout<<"first needs login..."<<std::endl;
         fl_alert("Not Logged!, first needs login...");        
@@ -182,13 +213,17 @@ void users_Window::create_cb(Fl_Widget* w,void* data){
     std::string temp=ss.str();
     const char *one=(const char*)temp.c_str();
     myWindow->idInput->value(one);
-
+    myWindow->idInput->deactivate();
     myWindow->labelFirstName->show();
     myWindow->firstNameInput->show();
     myWindow->labelLastName->show();
     myWindow->lastNameInput->show();
     myWindow->labelPassword->show();
     myWindow->passwordInput->show();
+    myWindow->labelMode->show();
+    myWindow->modeInput->show();
+    myWindow->labelUsername->show();
+    myWindow->usernameInput->show();
     
     myWindow->search->hide();
     myWindow->create->hide();
@@ -207,7 +242,7 @@ void users_Window::update_cb(Fl_Widget* w,void* data){
         fl_alert("Not Logged!, first needs login...");        
         return;
     } 
-    
+    myWindow->localUser->printData();
     std::cout<<"updating...."<<std::endl;
     
 }
@@ -223,7 +258,7 @@ void users_Window::quit_cb(Fl_Widget* w,void* data){
     
     std::cout<<"quitting...."<<std::endl;
 
-
+    myWindow->idInput->activate();
     
     myWindow->labelFirstName->hide();
     myWindow->firstNameInput->hide();
@@ -231,6 +266,10 @@ void users_Window::quit_cb(Fl_Widget* w,void* data){
     myWindow->lastNameInput->hide();
     myWindow->labelPassword->hide();
     myWindow->passwordInput->hide();
+    myWindow->labelMode->hide();
+    myWindow->modeInput->hide();
+    myWindow->labelUsername->hide();
+    myWindow->usernameInput->hide();
     
     myWindow->search->show();
     myWindow->create->show();
@@ -242,4 +281,38 @@ void users_Window::quit_cb(Fl_Widget* w,void* data){
 
 users_Window::~users_Window(){ 
     delete this->localUser;
+}
+
+void users_Window::update_pass_cb(Fl_Widget* w,void* data){        
+    users_Window *myWindow = (users_Window*)data;
+    Fl_Input *input=(Fl_Input*)(w);
+    myWindow->localUser->setPassword(input->value());    
+    return;
+}
+
+void users_Window::update_firstName_cb(Fl_Widget* w,void* data){        
+    users_Window *myWindow = (users_Window*)data;
+    
+    Fl_Input *input=(Fl_Input*)(w);
+    myWindow->localUser->setFirstName(input->value());    
+    return;
+}
+
+void users_Window::update_lastName_cb(Fl_Widget* w,void* data){        
+    users_Window *myWindow = (users_Window*)data;
+    Fl_Input *input=(Fl_Input*)(w);
+    myWindow->localUser->setLastName(input->value());    
+    return;
+}
+void users_Window::update_mode_cb(Fl_Widget* w,void* data){        
+    users_Window *myWindow = (users_Window*)data;
+    Fl_Input *input=(Fl_Input*)(w);
+    myWindow->localUser->setMode(input->value());    
+    return;
+}
+void users_Window::update_username_cb(Fl_Widget* w,void* data){        
+    users_Window *myWindow = (users_Window*)data;
+    Fl_Input *input=(Fl_Input*)(w);
+    myWindow->localUser->setUsername(input->value());    
+    return;
 }

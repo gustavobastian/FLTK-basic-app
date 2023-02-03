@@ -45,32 +45,32 @@ class Person{
          * 
          * @param nameP 
          */
-        void setFirstName(std::string nameP){firstname=nameP;return;};
+        void setFirstName(std::string nameP){this->firstname=nameP;return;};
         /**
          * @brief Set the Last Name object
          * 
          * @param nameP 
          */
-        void setLastName(std::string nameP){lastname=nameP;return;};
+        void setLastName(std::string nameP){this->lastname=nameP;return;};
         /**
          * @brief Set the Password object
          * 
          * @param passP 
          */
-        void setPassword(std::string passP){password=passP;return;};
+        void setPassword(std::string passP){this->password=passP;return;};
         
         /**
          * @brief Set the Mode object
          * 
          * @param _mode 
          */
-        void setMode(std::string _mode){mode=_mode;};
+        void setMode(std::string _mode){this->mode=_mode;};
         /**
          * @brief Set the Username object
          * 
          * @param _username 
          */
-        void setUsername(std::string _username){username=_username;};
+        void setUsername(std::string _username){this->username=_username;};
         
         void setId(int idP){id=idP;return;};
 

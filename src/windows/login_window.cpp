@@ -99,11 +99,7 @@ int login_Window::set_value(unsigned int valueP)
     return 1;
     
 }
-/**
- * @brief Destroy the products Window::products Window object
- * 
- */
-login_Window::~login_Window(){ }
+
 
 /**
  * @brief updates the name property of the login Window object
@@ -152,3 +148,11 @@ void login_Window::send_values_cb(Fl_Widget*w,void* data){
 
     return;
 };
+/**
+ * @brief Destroy the products Window::products Window object
+ * 
+ */
+login_Window::~login_Window(){ 
+    delete this->localDB;
+    delete this->stateLocal;
+}
