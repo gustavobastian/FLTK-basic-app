@@ -41,6 +41,8 @@ class users_Window:public Fl_Group
         Fl_Box *labelId ;
         Fl_Int_Input *idInput;
 
+        bool modeUpdate=false;
+
         Person *localUser;
 
         Fl_Box *labelFirstName ;
@@ -58,6 +60,7 @@ class users_Window:public Fl_Group
         Fl_Button *create ; 
         Fl_Button *update ; 
         Fl_Button *quit ; 
+        Fl_Button *send ; 
         
         bool *authorization;
     public:
@@ -70,6 +73,7 @@ class users_Window:public Fl_Group
         static void create_cb(Fl_Widget* w,void* data);      
         static void update_cb(Fl_Widget* w,void* data);      
         static void quit_cb(Fl_Widget* w,void* data);      
+        static void send_cb(Fl_Widget* w,void* data);      
         
 
         bool *get_authorization(){ return this->authorization; }  

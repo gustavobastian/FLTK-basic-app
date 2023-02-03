@@ -63,8 +63,9 @@ Person::Person(const std::string *a){
 }
 
 void Person::clearData(){
+    std::cout<<"cleaning"<<std::endl;
     this->id=0;
-    this->firstname="";
+    this->firstname=" ";
     this->lastname="";
     this->mode="";
     this->username="";

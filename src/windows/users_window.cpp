@@ -68,7 +68,7 @@ users_Window::users_Window(int w, int h, int data, databaseService *localDB, boo
     labelPassword = new Fl_Box(40,245,25,25,"Password:");
     labelPassword->hide();
     passwordInput = new Fl_Input( 100,245,150,25);
-    passwordInput->callback(this->update_pass_cb,(void*)this);
+    passwordInput->callback(this->update_pass_cb,(void*)this);    
     passwordInput->hide();
     
     /*Mode
@@ -106,11 +106,23 @@ users_Window::users_Window(int w, int h, int data, databaseService *localDB, boo
     update = new Fl_Button( w-125,240,90,25,"Update");  
     update->color(FL_DARK_CYAN);  
     update->callback(this->update_cb,(void*)(this));                          
+    
 
     quit = new Fl_Button( w-125,280,90,25,"Quit");  
     quit->color(FL_DARK_CYAN);  
     quit->callback(this->quit_cb,(void*)(this));                          
     quit->hide();
+
+
+
+    send = new Fl_Button( w-125,315,90,25,"Send");  
+    send->color(FL_DARK_CYAN);  
+    send->callback(this->send_cb,(void*)(this));                          
+    send->hide();
+
+    
+
+
     this->end();
 }
 /**
@@ -189,7 +201,9 @@ void users_Window::search_cb(Fl_Widget* w,void* data){
     
     myWindow->search->hide();
     myWindow->create->hide();
+    myWindow->update->hide();
     myWindow->quit->show();
+    myWindow->send->show();
     
     //myWindow->localUser->clearData();
     myWindow->redraw();
@@ -198,6 +212,8 @@ void users_Window::search_cb(Fl_Widget* w,void* data){
 void users_Window::create_cb(Fl_Widget* w,void* data){  
     users_Window *myWindow = (users_Window*)data;  
     std::stringstream ss;        
+    
+    myWindow->modeUpdate=false;
 
     myWindow->localUser->clearData();
     if(*(myWindow->get_authorization())==false){
@@ -227,8 +243,9 @@ void users_Window::create_cb(Fl_Widget* w,void* data){
     
     myWindow->search->hide();
     myWindow->create->hide();
+    myWindow->update->hide();
     myWindow->quit->show();
-    
+    myWindow->send->show();
     
     myWindow->redraw();
     
@@ -236,14 +253,13 @@ void users_Window::create_cb(Fl_Widget* w,void* data){
 
 void users_Window::update_cb(Fl_Widget* w,void* data){  
     users_Window *myWindow = (users_Window*)data;          
-
+    myWindow->modeUpdate=true;
     if(*(myWindow->get_authorization())==false){
         std::cout<<"first needs login..."<<std::endl;
         fl_alert("Not Logged!, first needs login...");        
         return;
     } 
-    myWindow->localUser->printData();
-    std::cout<<"updating...."<<std::endl;
+    std::string dataDB=myWindow->localUser->generateStringDB();
     
 }
 
@@ -257,6 +273,16 @@ void users_Window::quit_cb(Fl_Widget* w,void* data){
     } 
     
     std::cout<<"quitting...."<<std::endl;
+    myWindow->localUser->clearData();
+
+    const char *one="";
+    
+
+    myWindow->firstNameInput->value(one);
+    myWindow->lastNameInput->value(one);
+    myWindow->passwordInput->value(one);
+    myWindow->usernameInput->value(one);
+    myWindow->modeInput->value(one);
 
     myWindow->idInput->activate();
     
@@ -273,7 +299,9 @@ void users_Window::quit_cb(Fl_Widget* w,void* data){
     
     myWindow->search->show();
     myWindow->create->show();
+    myWindow->update->show();
     myWindow->quit->hide();
+    myWindow->send->hide();
     myWindow->redraw();
     
 }
@@ -315,4 +343,22 @@ void users_Window::update_username_cb(Fl_Widget* w,void* data){
     Fl_Input *input=(Fl_Input*)(w);
     myWindow->localUser->setUsername(input->value());    
     return;
+}
+
+void users_Window::send_cb(Fl_Widget* w,void* data){  
+    users_Window *myWindow = (users_Window*)data;     
+    if(*(myWindow->get_authorization())==false){
+        std::cout<<"first needs login..."<<std::endl;
+        fl_alert("Not Logged!, first needs login...");        
+        return;
+    } 
+
+    myWindow->localUser->setId(std::stoi(myWindow->idInput->value()));
+    std::string dataDB=myWindow->localUser->generateStringDB();
+    std::cout<<"updating....:"<<dataDB<<std::endl;
+
+    if(myWindow->modeUpdate==false){
+        myWindow->localDB->insertElementTable(dataDB,"users");
+    }
+
 }
