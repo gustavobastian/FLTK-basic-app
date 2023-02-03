@@ -8,7 +8,7 @@
 /**
  * @brief Construct a new database Service::database Service object
  * 
- * @param addressP string place and name of the database(ex /opt/mydatabase)
+ * @param addressP string place and name of the database(ex "/opt/file.db")
  */
 databaseService::databaseService(std::string addressP){
     this->address=addressP;    
@@ -40,7 +40,7 @@ int databaseService::openDB(){
  */
 int databaseService::createTable(std::string tableName){
     if(tableName.size()==0) {
-         std::cerr  << "Error creating table: no tablename" << std::endl;
+         std::cerr  << "Error creating table: no table name" << std::endl;
         return -1;
     }
       // create a table
@@ -66,7 +66,7 @@ int databaseService::createTable(std::string tableName){
 int databaseService::createTable(std::string tableName, std::vector<std::string> columns){
     
     if((columns.size()==0)||(tableName.size()==0)) {
-         std::cout  << "Error creating table: no columns o no tablename" << std::endl;
+         std::cout  << "Error creating table: no columns o no table name" << std::endl;
         return -1;
     }
 
@@ -97,7 +97,7 @@ int databaseService::createTable(std::string tableName, std::vector<std::string>
 
 int databaseService::dropTable(std::string tableName){
     if((tableName.size()==0)) {
-         std::cout  << "Error dropping table: no tablename" << std::endl;
+         std::cout  << "Error dropping table: no table name" << std::endl;
         return -1;
     }
       // create a table
@@ -105,7 +105,7 @@ int databaseService::dropTable(std::string tableName){
     rc = sqlite3_exec(db, sql.c_str()  , NULL, 0, NULL);
 
     if (rc != SQLITE_OK) {
-        std::cout  << "Error droping table: " << sqlite3_errmsg(db) << std::endl;
+        std::cout  << "Error deleting table: " << sqlite3_errmsg(db) << std::endl;
         return -1;
     }
     return 0;
