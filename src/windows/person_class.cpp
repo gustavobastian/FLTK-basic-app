@@ -84,6 +84,16 @@ std::string Person::generateStringDB(){
 
 }
 
+std::string Person::generateUpdateDB(){
+    std::string output="";    
+    std::stringstream ss;
+
+    ss<<"firstname='"<<this->firstname<<"',lastname='"<<this->lastname<<"',mode='"<<this->mode<<"',username='"<<this->username<<"',password='"<<this->password<<"'";
+    output=ss.str();
+    return output;
+
+}
+
 int Person::setData(const std::string *data){
  std::string localString = (*data);
     for(unsigned int i =0;i<localString.size();i++){

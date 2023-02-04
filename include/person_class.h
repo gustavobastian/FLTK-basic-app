@@ -151,6 +151,13 @@ class Person{
          */
         std::string generateStringDB();
 
+        /**
+         * @brief generate string object in order to alter the person in the database
+         * 
+         * @return std::string objet to pass as parameter to the databaseService function
+         */
+        std::string generateUpdateDB();
+
         int setData(const std::string *a);
 
         ~Person();

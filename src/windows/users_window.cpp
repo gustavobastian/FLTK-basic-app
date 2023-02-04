@@ -366,6 +366,10 @@ void users_Window::send_cb(Fl_Widget* w,void* data){
         else{
                 fl_alert("User inserted!\n");
             }    
+    }else{
+
+        std::string dbData;        
+        
     }
 
 }

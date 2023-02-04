@@ -87,6 +87,7 @@ TEST(DBCREATION, TABLEDROP){
 
     //element for test
     std::string value= "1, 'Pedro','Perez',20 ";
+    std::string returnValue= "1,Pedro,Perez,20,;";
     //creation
     auto output = myDb->createTable("myTable",columns);    
     EXPECT_EQ(output,0);
@@ -97,7 +98,8 @@ TEST(DBCREATION, TABLEDROP){
     EXPECT_EQ(output1,0);
 
     auto output2 = myDb->findElement("myTable","id","1");
-    std::cout<<"received:"<<output2<<endl;
+    
+    EXPECT_EQ(output2,returnValue);
 
     //cleaning
     auto output3 = myDb->dropTable("myTable");
@@ -137,7 +139,51 @@ TEST(DBCREATION, TABLEDROP){
     EXPECT_EQ(output2,0);
 
     auto output3 = myDb->getAllElement("myTable",3);
-    std::cout<<"received:"<<output3<<endl;
+    
+
+    //cleaning
+    auto output4 = myDb->dropTable("myTable");
+    EXPECT_EQ(output4,0);
+
+    vector<std::string>().swap(columns);
+    delete myDb;
+ } 
+
+
+ TEST(DBINSERTION, ALTERING){
+    std::string  data("../../data/generalDB.db");
+    auto *myDb= new databaseService(data);
+    myDb->openDB();
+
+    std::vector <std::string> columns;
+    
+    //table for test
+    columns.push_back("id INTEGER PRIMARY KEY");
+    columns.push_back("firstname TEXT");
+    columns.push_back("lastname TEXT");
+    columns.push_back("age INTEGER");
+
+    //element for test
+    std::string value= "1, 'Pedro','Perez',20 ";    
+
+    std::string newValues= "firstname='Pedro2', lastname='Perez2', age=20 ";    
+    std::string returnValue= "1,Pedro2,Perez2,20,;";  
+    int index=1;
+    //creation
+    auto output = myDb->createTable("myTable",columns);    
+    EXPECT_EQ(output,0);
+    
+    //test
+
+    auto output1 = myDb->insertElementTable(value,"myTable");
+    auto output2 = myDb->updateElementTable(newValues,"myTable",index);
+    EXPECT_EQ(output2,0);
+    auto output3 = myDb->findElement("myTable","id","1");
+    
+    EXPECT_EQ(output3,returnValue);
+
+    
+    
 
     //cleaning
     auto output4 = myDb->dropTable("myTable");

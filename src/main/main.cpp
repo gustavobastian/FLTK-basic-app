@@ -86,14 +86,7 @@ int main(int argc, char **argv) {
 
             // users tab
             tabs->add(persons);
-            
-            
-            // Stocks tab
-            tabs->add(myStock);
-            
-            // Products2 tab
-            //if(state == true)
-            tabs->add(myProduct);
+    
             
             
         }

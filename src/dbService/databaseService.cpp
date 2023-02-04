@@ -130,6 +130,34 @@ int databaseService::insertElementTable(std::string Element,std::string tableNam
 
     return 0;
 };
+
+
+/**
+ * @brief updating a row to a database table
+ * 
+ * @param Element string with new values to insert into the table
+ * @param tableName name of the table
+ * @param index index of the row
+ * @return int 0:success, -1:error
+ */
+int databaseService::updateElementTable(std::string Element,std::string tableName,int index){
+    std::stringstream ss;
+    ss<<index;
+    std::string indexS;
+    indexS=ss.str();
+    
+    std::string sql = "UPDATE " +tableName+" SET "+ Element +"WHERE id="+indexS+";";
+    this->rc = sqlite3_exec(this->db, sql.c_str(), NULL, 0, NULL);
+
+    if (rc != SQLITE_OK) {
+        std::cout << "Error updating table: " << sqlite3_errmsg(db) << std::endl;
+        return -1;
+    }
+
+    return 0;
+};
+
+
 /**
  * @brief find elements by tag
  * 
@@ -186,8 +214,7 @@ std::string databaseService::getAllElement(std::string tableName, unsigned int l
     std::string limitS=ss.str();
     std::string output;
     ss.str("");
-    std::string sql = "SELECT * FROM "+ tableName +" LIMIT " +limitS+";";
-    std::cout<<sql<<std::endl;
+    std::string sql = "SELECT * FROM "+ tableName +" LIMIT " +limitS+";";    
     sqlite3_stmt *stmt;
     rc = sqlite3_prepare_v2(db, sql.c_str(), -1, &stmt, NULL);
 

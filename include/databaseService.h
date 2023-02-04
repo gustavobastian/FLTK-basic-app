@@ -35,6 +35,7 @@ class databaseService {
     int createTable(std::string tableName,std::vector<std::string> columns);
     int dropTable(std::string tableName);
     int insertElementTable(std::string Element, std::string tableName);
+    int updateElementTable(std::string Element, std::string tableName, int index);
     std::string findElement(std::string tableName, std::string elementTag, std::string elementValue);
     std::string getAllElement(std::string tableName, unsigned int limit);
     long getLastIndex(std::string tableName);
