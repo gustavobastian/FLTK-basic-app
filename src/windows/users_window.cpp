@@ -158,7 +158,7 @@ int users_Window::set_value(unsigned int valueP) {
 
 void users_Window::search_cb(Fl_Widget* w,void* data){  
     users_Window *myWindow = (users_Window*)data;          
-    
+    myWindow->modeUpdate=true;
 
     if(*(myWindow->get_authorization())==false){
         std::cout<<"Needs login..."<<std::endl;
@@ -253,7 +253,7 @@ void users_Window::create_cb(Fl_Widget* w,void* data){
 
 void users_Window::update_cb(Fl_Widget* w,void* data){  
     users_Window *myWindow = (users_Window*)data;          
-    myWindow->modeUpdate=true;
+    
     if(*(myWindow->get_authorization())==false){
         std::cout<<"Needs login..."<<std::endl;
         fl_alert("Not Logged!, needs login...");        
@@ -271,7 +271,7 @@ void users_Window::quit_cb(Fl_Widget* w,void* data){
         fl_alert("Not Logged!, needs login...");        
         return;
     } 
-    
+    myWindow->modeUpdate=false;
     std::cout<<"quitting...."<<std::endl;
     myWindow->localUser->clearData();
 
@@ -368,8 +368,17 @@ void users_Window::send_cb(Fl_Widget* w,void* data){
             }    
     }else{
 
-        std::string dbData;        
-        
+        std::string dbData;  
+        dbData= myWindow->localUser->generateUpdateDB();
+        std::cout<<dbData<<std::endl;
+        int returned = myWindow->localDB->updateElementTable(dbData,"users",myWindow->localUser->getId());
+         if(returned ==-1)
+            {
+                fl_alert("Error altering user into db!\n");
+            }
+        else{
+                fl_alert("User modified!\n");
+            } 
     }
 
 }
