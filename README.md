@@ -26,3 +26,8 @@ cmake
 /usr/bin/cmake --build ./ --config Debug --target practica --
 
 ```
+## Captures
+
+<img src="./docs/page1.png" style="padding-left:100px; "  width="80%">
+<img src="./docs/page4.png" style="padding-left:100px; "  width="80%">
+<img src="./docs/page5.png" style="padding-left:100px; "  width="80%">
