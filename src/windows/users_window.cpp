@@ -294,6 +294,13 @@ void users_Window::update_cb(Fl_Widget* w,void* data){
     
 }
 
+/**
+ * @brief callback function for the quit button, erases the current person and hide send button
+ * 
+ * @param w 
+ * @param data 
+ */
+
 void users_Window::quit_cb(Fl_Widget* w,void* data){  
     users_Window *myWindow = (users_Window*)data;          
 
