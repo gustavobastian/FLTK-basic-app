@@ -24,7 +24,15 @@ users_Window::users_Window(int x, int y):Fl_Group(10,35,x-10,y-35,"Users")
            
     this->end();
 }
-
+/**
+ * @brief Construct a new users Window::users Window object
+ * 
+ * @param w 
+ * @param h 
+ * @param data 
+ * @param localDB 
+ * @param state 
+ */
 users_Window::users_Window(int w, int h, int data, databaseService *localDB, bool *state):Fl_Group(10,35,w-10,h-35,"Users")
 {
     this->set_authorization(state);
@@ -150,12 +158,22 @@ unsigned int users_Window::get_value() {
     return this->value;
 }
 
-
+/**
+ * @brief set local value for the user window
+ * 
+ * @param valueP 
+ * @return int 
+ */
 int users_Window::set_value(unsigned int valueP) {
     this->value=valueP;
     return 1;    
 }
-
+/**
+ * @brief callback for looking for a user
+ * 
+ * @param w pointer to button
+ * @param data pointer to parent window
+ */
 void users_Window::search_cb(Fl_Widget* w,void* data){  
     users_Window *myWindow = (users_Window*)data;          
     myWindow->modeUpdate=true;
@@ -209,6 +227,13 @@ void users_Window::search_cb(Fl_Widget* w,void* data){
     myWindow->redraw();
 }
 
+/**
+ * @brief callback function for the create button
+ * 
+ * @param w pointer to the button
+ * @param data pointer to the parent window
+ */
+
 void users_Window::create_cb(Fl_Widget* w,void* data){  
     users_Window *myWindow = (users_Window*)data;  
     std::stringstream ss;        
@@ -251,6 +276,12 @@ void users_Window::create_cb(Fl_Widget* w,void* data){
     
 }
 
+/**
+ * @brief callback function for the update button
+ * 
+ * @param w pointer to the button
+ * @param data pointer to the window
+ */
 void users_Window::update_cb(Fl_Widget* w,void* data){  
     users_Window *myWindow = (users_Window*)data;          
     
@@ -306,18 +337,33 @@ void users_Window::quit_cb(Fl_Widget* w,void* data){
     
 }
 
+/**
+ * @brief Destroy the users Window::users Window object
+ * 
+ */
 
 users_Window::~users_Window(){ 
     delete this->localUser;
 }
 
+/**
+ * @brief callback that update the password object when the widget is modified
+ * 
+ * @param w pointer to the input
+ * @param data pointer to the window
+ */
 void users_Window::update_pass_cb(Fl_Widget* w,void* data){        
     users_Window *myWindow = (users_Window*)data;
     Fl_Input *input=(Fl_Input*)(w);
     myWindow->localUser->setPassword(input->value());    
     return;
 }
-
+/**
+ * @brief function that update the first name when the widget is modified
+ * 
+ * @param w pointer to the widget
+ * @param data pointer to the window
+ */
 void users_Window::update_firstName_cb(Fl_Widget* w,void* data){        
     users_Window *myWindow = (users_Window*)data;
     
@@ -325,25 +371,50 @@ void users_Window::update_firstName_cb(Fl_Widget* w,void* data){
     myWindow->localUser->setFirstName(input->value());    
     return;
 }
-
+/**
+ * @brief function that update the last name when the widget is modified
+ * 
+ * @param w pointer to the widget
+ * @param data pointer to the window
+ */
 void users_Window::update_lastName_cb(Fl_Widget* w,void* data){        
     users_Window *myWindow = (users_Window*)data;
     Fl_Input *input=(Fl_Input*)(w);
     myWindow->localUser->setLastName(input->value());    
     return;
 }
+/**
+ * @brief function that update the mode when the widget is modified
+ * 
+ * @param w pointer to the widget modified 
+ * @param data pointer to the window
+ */
 void users_Window::update_mode_cb(Fl_Widget* w,void* data){        
     users_Window *myWindow = (users_Window*)data;
     Fl_Input *input=(Fl_Input*)(w);
     myWindow->localUser->setMode(input->value());    
     return;
 }
+
+/**
+ * @brief function that update the username when the widget is modified
+ * 
+ * @param w pointer to the widget
+ * @param data pointer to the window
+ */
 void users_Window::update_username_cb(Fl_Widget* w,void* data){        
     users_Window *myWindow = (users_Window*)data;
     Fl_Input *input=(Fl_Input*)(w);
     myWindow->localUser->setUsername(input->value());    
     return;
 }
+
+/**
+ * @brief callback to the send button. Check if the user is logged then submit the data to the database.
+ * 
+ * @param w pointer to the widget
+ * @param data pointer to the window
+ */
 
 void users_Window::send_cb(Fl_Widget* w,void* data){  
     users_Window *myWindow = (users_Window*)data;     

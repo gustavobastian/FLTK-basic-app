@@ -14,6 +14,8 @@ sudo apt-get install libx11-xcb-dev libfontenc-dev libxaw7-dev libxkbfile-dev li
 
 Download gtest from the repository https://github.com/google/googletest and decompress it inside ./lib/gtest.
 
+
+
 Execute :
 ```
 sudo apt install cmake

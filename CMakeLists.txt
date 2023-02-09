@@ -5,6 +5,8 @@ project(practica-templates)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(CMAKE_CXX_STANDARD 20)
+
+
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 include_directories("${PROJECT_SOURCE_DIR}/include" "${PROJECT_BUILD_DIR}/include" "/lib/gtest/googletest/include/gtest" "${PROJECT_BUILD_DIR}/lib/gtest/googletest/include")
 
@@ -25,7 +27,7 @@ target_include_directories(practica PUBLIC ${FLTK_INCLUDE_DIRS} /include /lib/gt
 
 
 # Use the global target
-target_link_libraries(practica LINK_PUBLIC ${CONAN_LIBS} gtest gtest_main windowsLib db2Lib  fltk fltk_images Xft  sqlite3)
+target_link_libraries(practica LINK_PUBLIC ${CONAN_LIBS} gtest gtest_main windowsLib  db2Lib  fltk fltk_images Xft  sqlite3)
 
 
 # first we can indicate the documentation build as an option and set it to ON by default
