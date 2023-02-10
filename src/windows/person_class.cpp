@@ -79,7 +79,7 @@ std::string Person::generateStringDB(){
     std::stringstream ss;
 
     ss<<this->id<<",'"<<this->firstname<<"','"<<this->lastname<<"','"<<this->mode<<"','"<<this->username<<"','"<<this->password<<"'";
-    output=ss.str();
+    output=ss.str();    
     return output;
 
 }
@@ -129,4 +129,5 @@ int Person::setData(const std::string *data){
     return 0;
 }
 
-Person::~Person(){}
+Person::~Person(){    
+}

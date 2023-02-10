@@ -42,13 +42,13 @@ stock_Window::stock_Window(int w, int h, int data,databaseService *localDB): Fl_
     this->value=data;
     this->color(FL_DARK_YELLOW);
     this->selection_color(FL_DARK_YELLOW );
-    /*
+    
     
     out = new Fl_Box(50,125,150,25,"Code:");
     b2 = new Fl_Int_Input( 50,160,150,25);
     b1 = new Fl_Button( 250,160,90,25,"Search"); 
     b1->color(FL_DARK_CYAN);       
-    */
+    
             
     this->end();
 }
@@ -81,4 +81,9 @@ int stock_Window::set_stock(unsigned int valueP)
  * @brief Destroy the stock Window::stock Window object
  * 
  */
-stock_Window::~stock_Window(){ }   
+stock_Window::~stock_Window(){ 
+    delete(this->out);
+    delete(this->b2);
+    delete(this->b1);
+
+}   

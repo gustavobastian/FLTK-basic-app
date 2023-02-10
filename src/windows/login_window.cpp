@@ -152,7 +152,11 @@ void login_Window::send_values_cb(Fl_Widget*w,void* data){
  * @brief Destroy the products Window::products Window object
  * 
  */
-login_Window::~login_Window(){ 
-    delete this->localDB;
-    delete this->stateLocal;
+login_Window::~login_Window(){     
+    delete (this->label1);
+    delete (this->label2);
+    delete (this->label3);
+    delete (this->name);
+    delete (this->password);
+    delete (this->login);
 }

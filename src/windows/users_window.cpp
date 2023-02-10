@@ -344,14 +344,6 @@ void users_Window::quit_cb(Fl_Widget* w,void* data){
     
 }
 
-/**
- * @brief Destroy the users Window::users Window object
- * 
- */
-
-users_Window::~users_Window(){ 
-    delete this->localUser;
-}
 
 /**
  * @brief callback that update the password object when the widget is modified
@@ -459,4 +451,33 @@ void users_Window::send_cb(Fl_Widget* w,void* data){
             } 
     }
 
+}
+
+
+/**
+ * @brief Destroy the users Window::users Window object
+ * 
+ */
+
+users_Window::~users_Window(){ 
+    delete(this->labelId);
+    delete(this->idInput);
+    delete(this->labelFirstName);
+    delete(this->firstNameInput);
+
+    delete(this->labelLastName);
+    delete(this->lastNameInput);
+
+    delete (this->labelPassword);
+    delete (this->passwordInput);
+    delete (this->labelMode) ;
+    delete (this->modeInput);
+    delete (this->labelUsername );
+    delete (this->usernameInput);
+    delete (this->search ); 
+    delete (this->create ); 
+    delete (this->update ); 
+    delete (this->quit ); 
+    delete (this->send ); 
+    delete this->localUser;
 }

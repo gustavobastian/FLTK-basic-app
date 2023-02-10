@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+
 #include <FL/Fl.H>
 #include <FL/Fl_Window.H>
 #include <FL/Fl_Tabs.H>
@@ -93,10 +94,9 @@ int main(int argc, char **argv) {
         tabs->end();    
     }
 
-    Fl_Button *logout = new Fl_Button( w-95,10,90,25,"Logout"); 
+    auto *logout = new Fl_Button( w-95,10,90,25,"Logout"); 
     logout->color(247);  
     logout->callback(logout_cb,&state);
-
     
     
         
@@ -111,6 +111,15 @@ int main(int argc, char **argv) {
        return retval = 0;
     }                 
     
+    //cleaning pointers
+    delete(login);
+    delete(myProduct);
+    delete(myStock);
+    delete(persons);
+    delete(myDb);    
+    delete(logout);
+    delete(win);
+
     return retval ;
     
 }
