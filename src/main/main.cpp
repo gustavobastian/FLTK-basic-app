@@ -39,13 +39,14 @@ void logout_cb(Fl_Widget* w,void* data){
     if(*mystate==false)
     {
     std::cout<<"not logged"<<std::endl;
-    fl_alert("Not Logged!\n");
+    fl_alert("Not Logged!\n");    
     return;
     }
 
     std::cout<<"loging out"<<std::endl;
     *mystate=false;
     fl_alert("Logged out!\n");
+    
 
 }  
 
@@ -92,15 +93,9 @@ int main(int argc, char **argv) {
     auto *logout = new Fl_Button( w-95,10,90,25,"Logout"); 
     logout->color(247);  
     logout->callback(logout_cb,&state);
-    
-    
-        
 
     win->end();
     win->show();
-
-
-
     int retval = 1;
     if (Fl::run()){
        return retval = 0;
