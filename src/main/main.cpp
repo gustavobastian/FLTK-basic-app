@@ -54,23 +54,17 @@ int main(int argc, char **argv) {
     std::string  data(dBAddress);
     auto *myDb= new databaseService(data);
     myDb->openDB();
-    
-    
+        
     //windows parameters
     auto w=W_Width;
     auto h=W_Height;
 
 
-
-
     //TODO replace with person
     auto state=false;
-       
 
     
     auto *login= new login_Window(w-10, h-50, 10 ,myDb, &state);
-    auto *myProduct= new products_Window(w-10, h-50, 10 ,myDb, &state);
-    auto *myStock = new stock_Window(w-10, h-50, 10 ,myDb);
     auto *persons = new users_Window(w-10, h-50, 10 ,myDb, &state);
 
     Fl_Window *win = new Fl_Window(w,h,"DB Management");
@@ -87,7 +81,8 @@ int main(int argc, char **argv) {
 
             // users tab
             tabs->add(persons);
-    
+
+
             
             
         }
@@ -112,9 +107,7 @@ int main(int argc, char **argv) {
     }                 
     
     //cleaning pointers
-    delete(login);
-    delete(myProduct);
-    delete(myStock);
+    delete(login);    
     delete(persons);
     delete(myDb);    
     delete(logout);
