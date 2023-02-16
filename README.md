@@ -20,6 +20,7 @@ Execute :
 ```
 sudo apt install cmake
 pip install conan
+source ~/.profile
 
 mkdir build
 cd build
