@@ -6,8 +6,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(CMAKE_CXX_STANDARD 20)
 
+set(CONAN_DISABLE_CHECK_COMPILER ON)
+
 
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+
 include_directories("${PROJECT_SOURCE_DIR}/include" "${PROJECT_BUILD_DIR}/include" "/lib/gtest/googletest/include/gtest" "${PROJECT_BUILD_DIR}/lib/gtest/googletest/include")
 
 
