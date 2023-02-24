@@ -28,6 +28,7 @@ int databaseService::openDB(){
     }
     else
     {
+        std::cout<<"database open"<<std::endl;
         return 0;
     }
 

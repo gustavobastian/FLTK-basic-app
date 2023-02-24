@@ -191,19 +191,25 @@ void users_Window::search_cb(Fl_Widget* w,void* data){
 
     const std::string myUser=myWindow->localDB->findElement("users","id",localId);
     
-    myWindow->localUser->setData(&myUser);
+    if(myWindow->localUser->setData(&myUser)!=0){
+        std::cerr<<"error setting data"<<std::endl;
+    };
    
     const char *one=(myWindow->localUser->getFirstName()).c_str();
-    const char *two=(myWindow->localUser->getLastName()).c_str();
-    const char *three=(myWindow->localUser->getPassword()).c_str();
-    const char *four=(myWindow->localUser->getUsername()).c_str();
-    const char *five=(myWindow->localUser->getMode()).c_str();
-
     myWindow->firstNameInput->value(one);
+    
+    const char *two=(myWindow->localUser->getLastName()).c_str();
     myWindow->lastNameInput->value(two);
+
+    const char *three=(myWindow->localUser->getPassword()).c_str();
     myWindow->passwordInput->value(three);
+
+    const char *four=(myWindow->localUser->getUsername()).c_str();
     myWindow->usernameInput->value(four);
+
+    const char *five=(myWindow->localUser->getMode()).c_str();
     myWindow->modeInput->value(five);
+    
 
     myWindow->idInput->deactivate();
     myWindow->labelFirstName->show();
