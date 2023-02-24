@@ -8,6 +8,9 @@
  * @copyright Copyright (c) 2023
  * 
  */
+#include<FL/Enumerations.H>
+#include<FL/Fl_Widget.H>
+
 /**
  * @brief windows width 
 */
@@ -19,10 +22,7 @@
 /**
  * @brief tabs width 
 */
-#define T_Width 800
-/**
- * @brief tabs height
-*/
-#define T_Height 480 
+
+
 
 #define dBAddress "../data/generalDB.db"

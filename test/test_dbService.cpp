@@ -10,6 +10,8 @@ using namespace std;
 TEST(DBCREATION, TABLECREATION){
     std::string  data("../../data/generalDB.db");
     auto *myDb= new databaseService(data);
+   
+
     myDb->openDB();
 
     auto output = myDb->createTable("myTable");
