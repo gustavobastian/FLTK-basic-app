@@ -43,7 +43,7 @@ void logout_cb(Fl_Widget* w,void* data){
     return;
     }
 
-    std::cout<<"loging out"<<std::endl;
+    std::cout<<"logging out"<<std::endl;
     *mystate=false;
     fl_alert("Logged out!\n");
     

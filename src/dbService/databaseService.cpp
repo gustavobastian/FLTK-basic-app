@@ -323,7 +323,6 @@ long databaseService::getLastIndex(std::string tableName){
   * 
   */
 databaseService::~databaseService(){
-    sqlite3_close(this->db);
-    free((void*)this->db);
+    sqlite3_close(this->db);   
 }
     
