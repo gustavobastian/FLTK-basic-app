@@ -44,6 +44,7 @@ public:
             cout<<"Login success"<<endl; 
             return 1;
             }
+            return 0;
     };
     
     ~myDb(){};

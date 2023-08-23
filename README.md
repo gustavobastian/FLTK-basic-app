@@ -12,7 +12,7 @@ libx11-xcb-dev, libfontenc-dev, libxaw7-dev, libxkbfile-dev, libxmu-dev, libxmuu
 sudo apt-get install libx11-xcb-dev libfontenc-dev libxaw7-dev libxkbfile-dev libxmu-dev libxmuu-dev  libxres-dev libxtst-dev libxvmc-dev libxcb-render-util0-dev libxcb-xkb-dev libxcb-icccm4-dev libxcb-image0-dev libxcb-keysyms1-dev libxcb-randr0-dev libxcb-shape0-dev libxcb-sync-dev libxcb-xfixes0-dev libxcb-xinerama0-dev libxcb-dri3-dev libxcb-util-dev  libxcb-util0-dev libxcb-xinerama0-dev libxcb-dri3-dev libftgl-dev
 ```
 
-Download gtest from the repository https://github.com/google/googletest and decompress it inside ./lib/gtest.
+Download gtest from the repository https://github.com/google/googletest and decompress it inside ./lib/gtest (the released used in this demo is v1.13.0).
 
 
 
