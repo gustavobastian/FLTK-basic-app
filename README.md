@@ -2,7 +2,6 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-# Hall-Of-Fame [![](https://img.shields.io/github/release/gustavobastian/hall-of-fame.svg?colorB=58839b)](https://github.com/gustavobastian/hall-of-fame/releases) [![](https://img.shields.io/github/license/gustavobastian/hall-of-fame.svg?colorB=ff0000)](https://github.com/gustavobastian/hall-of-fame/blob/master/LICENSE.md)
 
 ## Objetives: 
 The main purpose of this project is learning how to use Conan.io(https://conan.io/) (this project follows the tips from https://www.youtube.com/watch?v=i_FGM_rH-Tg&t=7s by José Tomás Tocino)
